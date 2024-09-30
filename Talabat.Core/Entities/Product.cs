@@ -16,7 +16,7 @@ namespace Talabat.Core.Entities
 
         public int BrandId { get; set; }
 
-        [InverseProperty("Products")]
+        //[InverseProperty("Products")]
         public ProductBrand Brand { get; set; }
 
         public int CategoryId { get; set; }
