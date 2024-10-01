@@ -6,7 +6,7 @@ namespace Talabat.APIS
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +23,31 @@ namespace Talabat.APIS
                 });
 
             var app = builder.Build();
+
+            using var scope = app.Services.CreateScope();
+            var services = scope.ServiceProvider;
+            var _dbcontext = services.GetRequiredService<StoreContext>();
+            var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+            try
+            {
+                await _dbcontext.Database.MigrateAsync();
+            }
+            catch (Exception ex)
+            {
+                var logger = loggerFactory.CreateLogger<Program>();
+                logger.LogError(ex, "error occured during database migration in Program");
+            }
+            //try
+            //{
+            //    var services = scope.ServiceProvider;
+            //    var _dbcontext = services.GetRequiredService<StoreContext>();
+            //    await _dbcontext.Database.MigrateAsync();
+            //}
+            //finally 
+            //{
+
+            //    scope.Dispose();
+            //}
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
