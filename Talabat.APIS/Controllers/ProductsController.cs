@@ -13,5 +13,12 @@ namespace Talabat.APIS.Controllers
         {
             _productRepo = productRepo;
         }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        {
+            var products = await _productRepo.GetAllAsync();
+            return Ok(products);
+        }
     }
 }
