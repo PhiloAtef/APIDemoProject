@@ -7,13 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Talabat.Core.Entities;
 
-namespace Talabat.Repository.Configurations
+namespace Talabat.Repository.Data.Configurations
 {
-    public class BrandConfig : IEntityTypeConfiguration<ProductBrand>
+    public class CategoryConfig : IEntityTypeConfiguration<ProductCategory>
     {
-        public void Configure(EntityTypeBuilder<ProductBrand> builder)
+        public void Configure(EntityTypeBuilder<ProductCategory> builder)
         {
-            builder.Property(b => b.Name).IsRequired();
+            builder.Property(c => c.Name).IsRequired();
         }
     }
 }

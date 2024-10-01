@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Talabat.Core.Entities;
 
-namespace Talabat.Repository.Configurations
+namespace Talabat.Repository.Data.Configurations
 {
     public class ProductConfig : IEntityTypeConfiguration<Product>
     {
@@ -17,7 +17,7 @@ namespace Talabat.Repository.Configurations
             builder.Property(p => p.Description).IsRequired();
             builder.Property(p => p.PictureUrl).IsRequired();
             builder.Property(p => p.Price).HasColumnType("decimal(18,2)");
-            builder.HasOne(p=> p.Brand).WithMany().HasForeignKey(p=> p.BrandId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(p => p.Brand).WithMany().HasForeignKey(p => p.BrandId).OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(p => p.Category).WithMany().HasForeignKey(p => p.CategoryId);
         }
     }
